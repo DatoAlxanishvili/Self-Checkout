@@ -18,8 +18,8 @@ public class ScanActivity extends AppCompatActivity{
 
 
 
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(marketName);
+       /* TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(marketName);*/
 
     }
 }
