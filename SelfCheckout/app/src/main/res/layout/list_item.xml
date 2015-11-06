@@ -3,6 +3,12 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="50dp">
 
+    <NumberPicker
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/numberPicker"
+        android:layout_weight="5" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,5 +31,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/imageButton"
-        android:layout_weight="4" />
+        android:layout_weight="5" />
 </LinearLayout>
