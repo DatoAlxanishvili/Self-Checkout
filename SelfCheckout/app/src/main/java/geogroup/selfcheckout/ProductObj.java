@@ -6,8 +6,8 @@ import android.widget.BaseAdapter;
  * Created by vano on 11/6/2015.
  */
 public class ProductObj {
-   static String name;
-   static double price;
+   private String name;
+    private double price;
 
 
     public ProductObj(String name, double price) {

@@ -29,7 +29,13 @@
 
     <ImageButton
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageButton"
-        android:layout_weight="5" />
+        android:layout_height="50dp"
+        android:id="@+id/deleteButton"
+        android:layout_weight="5"
+        android:src="@drawable/delete"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        />
+
 </LinearLayout>

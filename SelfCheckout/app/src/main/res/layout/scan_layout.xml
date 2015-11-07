@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/productList"
-        android:layout_weight="6" />
+        android:layout_weight="6"
+       />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -43,7 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="SCAN PRODUCT"
-            android:id="@+id/scanButton" />
+            android:id="@+id/scanButton"
+            />
     </LinearLayout>
 
 </LinearLayout>

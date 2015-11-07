@@ -15,8 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ScanActivity" ></activity>
-        <activity android:name=".ScanBarCode" ></activity>
+        <activity android:name=".ScanActivity" android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".ScanBarCode" android:parentActivityName=".ScanActivity" ></activity>
 
     </application>
 

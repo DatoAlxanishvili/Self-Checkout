@@ -5,8 +5,12 @@ import android.view.View;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,7 +41,7 @@ public class ListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View itemView;
         viewHolder holder;
@@ -45,8 +49,38 @@ public class ListAdapter extends BaseAdapter {
         {
             itemView=View.inflate(context,R.layout.list_item,null);
 
-            TextView priceView = (TextView) itemView.findViewById(R.id.productPrice);
+            final TextView priceView = (TextView) itemView.findViewById(R.id.productPrice);
             TextView nameView = (TextView) itemView.findViewById(R.id.productName);
+
+            ImageButton btn=(ImageButton)itemView.findViewById(R.id.deleteButton);
+
+            btn.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    product.remove(position);
+                    notifyDataSetChanged();
+
+                }
+            });
+
+
+            NumberPicker np = (NumberPicker) itemView.findViewById(R.id.numberPicker);
+            np.setMaxValue(99);
+            np.setMinValue(1);
+            np.setValue(1);
+
+            np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                @Override
+                public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
+
+                    double priceProduct = product.get(position).getPrice() * oldVal;
+                    priceView.setText(String.valueOf(priceProduct));
+
+
+                }
+            });
 
             holder = new viewHolder();
             holder.priceView = priceView;
@@ -54,7 +88,8 @@ public class ListAdapter extends BaseAdapter {
 
             itemView.setTag(holder);
 
-        }else {
+        }
+        else {
             itemView=convertView;
             holder = (viewHolder) itemView.getTag();
         }
@@ -74,6 +109,9 @@ public class ListAdapter extends BaseAdapter {
 
         return itemView;
     }
+
+
+
 
     private class viewHolder
     {

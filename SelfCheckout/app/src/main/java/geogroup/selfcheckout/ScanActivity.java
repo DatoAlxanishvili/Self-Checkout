@@ -15,50 +15,62 @@ import java.util.ArrayList;
  * Created by vano on 11/6/2015.
  */
 public class ScanActivity extends AppCompatActivity{
+    static ArrayList<ProductObj> productObjs = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_layout);
 
         Bundle bundle = getIntent().getExtras();
-        String barCode = bundle.getString("barCode");
+        final String barCode = bundle.getString("barCode");
 
-         TextView textView = (TextView) findViewById(R.id.sumText);
-        textView.setText(barCode);
+        final ListView listview = (ListView) findViewById(R.id.productList);
+        if(barCode != null)
+        {
+            ProductObj productObjs1 = new ProductObj(barCode,2);
+            productObjs.add(productObjs1);
 
+            ListAdapter listAdapter = new ListAdapter(ScanActivity.this,productObjs);
+            listview.setAdapter(listAdapter);
 
-
-        ArrayList<ProductObj> productObjs = new ArrayList<>();
-
-        for (int i = 0; i < Product.name.length;i++) {
-            ProductObj productObj = new ProductObj(Product.name[i],Product.price[i]);
-            productObjs.add(productObj);
+            listAdapter.notifyDataSetChanged();
         }
 
 
 
-
-        final ListView listview = (ListView) findViewById(R.id.productList);
-        ListAdapter listAdapter = new ListAdapter(ScanActivity.this,productObjs);
+  /*  if(!productObjs.isEmpty())
+    {
+        listAdapter = new ListAdapter(ScanActivity.this,productObjs);
         listview.setAdapter(listAdapter);
 
+    }*/
 
-
-
-
-
+      /*  for (int i = 0; i < Product.name.length;i++) {
+            ProductObj productObj = new ProductObj(Product.name[i],Product.price[i]);
+            productObjs.add(productObj);
+        }*/
 
 
         Button button = (Button) findViewById(R.id.scanButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ScanActivity.this,ScanBarCode.class);
+                Intent intent = new Intent(ScanActivity.this, ScanBarCode.class);
+
                 startActivity(intent);
             }
         });
 
 
-
     }
+
+    //back knopkis gadatvirtva
+
+     public void onBackPressed()
+    {
+       super.onBackPressed();
+        startActivity(new Intent(ScanActivity.this, MainActivity.class));
+        finish();
+    }
+
 }
