@@ -53,8 +53,16 @@ public class ListAdapter extends BaseAdapter {
             TextView nameView = (TextView) itemView.findViewById(R.id.productName);
 
             ImageButton btn=(ImageButton)itemView.findViewById(R.id.deleteButton);
+            NumberPicker np = (NumberPicker) itemView.findViewById(R.id.numberPicker);
 
-            btn.setOnClickListener(new View.OnClickListener() {
+            holder = new viewHolder();
+            holder.priceView = priceView;
+            holder.nameView = nameView;
+            holder.btn = btn;
+            holder.np= np;
+
+
+            holder.btn.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -66,25 +74,23 @@ public class ListAdapter extends BaseAdapter {
             });
 
 
-            NumberPicker np = (NumberPicker) itemView.findViewById(R.id.numberPicker);
-            np.setMaxValue(99);
-            np.setMinValue(1);
-            np.setValue(1);
 
-            np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+
+            holder.np.setMaxValue(99);
+            holder.np.setMinValue(1);
+            holder.np.setValue(1);
+
+            holder.np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                 @Override
                 public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
 
                     double priceProduct = product.get(position).getPrice() * oldVal;
                     priceView.setText(String.valueOf(priceProduct));
 
-
                 }
             });
 
-            holder = new viewHolder();
-            holder.priceView = priceView;
-            holder.nameView = nameView;
+
 
             itemView.setTag(holder);
 
@@ -117,7 +123,8 @@ public class ListAdapter extends BaseAdapter {
     {
         TextView priceView;
         TextView nameView;
-
+        ImageButton btn;
+        NumberPicker np;
     }
 }
 

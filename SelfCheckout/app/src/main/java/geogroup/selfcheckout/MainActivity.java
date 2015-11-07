@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     { Intent intent = new Intent(MainActivity.this,ScanActivity.class);
         intent.putExtra("marketName", st);
         startActivity(intent);
+        this.finish();
     }
 
 
@@ -59,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBackPressed()
     {
-        super.onBackPressed();
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(a);
 
-        finish();
     }
 
     }

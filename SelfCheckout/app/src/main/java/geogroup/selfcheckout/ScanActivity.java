@@ -2,11 +2,13 @@ package geogroup.selfcheckout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,15 +18,21 @@ import java.util.ArrayList;
  */
 public class ScanActivity extends AppCompatActivity{
     static ArrayList<ProductObj> productObjs = new ArrayList<>();
+    ListView listview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_layout);
 
-        Bundle bundle = getIntent().getExtras();
-        final String barCode = bundle.getString("barCode");
+       listview = (ListView) findViewById(R.id.productList);
 
-        final ListView listview = (ListView) findViewById(R.id.productList);
+        String barCode=null;
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null){
+        barCode = bundle.getString("barCode");
+        getIntent().removeExtra("barCode");}
         if(barCode != null)
         {
             ProductObj productObjs1 = new ProductObj(barCode,2);
@@ -69,8 +77,11 @@ public class ScanActivity extends AppCompatActivity{
      public void onBackPressed()
     {
        super.onBackPressed();
-        startActivity(new Intent(ScanActivity.this, MainActivity.class));
-        finish();
+        Intent intent = new Intent(ScanActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        productObjs.clear();
+        startActivity(intent);
+        this.finish();
     }
 
 }

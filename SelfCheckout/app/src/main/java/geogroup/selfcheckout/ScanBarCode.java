@@ -40,7 +40,9 @@ public class ScanBarCode  extends Activity implements ZBarScannerView.ResultHand
        String result = rawResult.getContents(); // Prints scan results
         Intent intent = new Intent(ScanBarCode.this,ScanActivity.class);
         intent.putExtra("barCode",result);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        this.finish();
         /*Log.v(TAG, rawResult.getBarcodeFormat().getName());*/ // Prints the scan format (qrcode, pdf417 etc.)
     }
 }
